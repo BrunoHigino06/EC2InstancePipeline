@@ -1,0 +1,3 @@
+module "network" {
+  1
+}
