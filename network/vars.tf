@@ -4,6 +4,7 @@ variable "defaultVPC" {
 
     default = {
       "name" = ""
+      "cidr_block" = ""
     }
 
     description = "VPC variables"
@@ -106,32 +107,29 @@ variable "DefaultSecurityGroups" {
     description = "Security group variables"
 }
 
-#Default Security group vars
-#Ingress Rules
-variable "DefaultIngress" {
-    type = map(any)
-
-    default = {
-      "from_port"   = ""
-      "to_port"     = ""
-      "protocol"    = ""
-      "cidr_blocks" = ""
-    }
-
-    description = "Ingress Security group rules variables"
+#Default Security group rules vars
+variable "DefaultSG_rules_type" {
+    type = list(string)
+    description = "Type of the rule on the security group"
 }
 
-#Egress Rules
-variable "DefaultEgress" {
-    type = map(any)
+variable "DefaultSG_rules_from_port" {
+    type = list(string)
+    description = "Start Port of the rule"
+}
 
-    default = {
-      "from_port"   = ""
-      "to_port"     = ""
-      "protocol"    = ""
-      "cidr_blocks" = ""
-    }
+variable "DefaultSG_rules_to_port" {
+    type = list(string)
+    description = "End Port of the rule"
+}
 
-    description = "Egress Security group rules variables"
+variable "DefaultSG_rules_protocol" {
+    type = list(string)
+    description = "Protocol used in the rule"
+}
+
+variable "DefaultSG_rules_cidr_blocks" {
+    type = list(string)
+    description = "CIDR block used in the rule"
 }
 

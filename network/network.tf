@@ -1,5 +1,6 @@
 #Default VPC
-resource "aws_default_vpc" "defaultVPC" {
+resource "aws_vpc" "defaultVPC" {
+  cidr_block = var.defaultVPC.cidr_block
   tags = {
     Name = var.defaultVPC.name
   }
@@ -8,7 +9,7 @@ resource "aws_default_vpc" "defaultVPC" {
 #Subnets
 resource "aws_subnet" "subnets" {
     count = length(var.subnets_cidr_block)
-    vpc_id     = aws_default_vpc.defaultVPC.id
+    vpc_id     = aws_vpc.defaultVPC.id
     cidr_block = var.subnets_cidr_block[count.index]
     availability_zone = var.subnet_az[count.index]
     tags = {
@@ -18,7 +19,7 @@ resource "aws_subnet" "subnets" {
 
 #Internet gateway
 resource "aws_internet_gateway" "IGW" {
-  vpc_id = aws_default_vpc.defaultVPC.id
+  vpc_id = aws_vpc.defaultVPC.id
 
   tags = {
     Name = var.IGW.name
@@ -27,7 +28,7 @@ resource "aws_internet_gateway" "IGW" {
 
 #Route table
 resource "aws_route_table" "DefaultRT" {
-    vpc_id = aws_default_vpc.defaultVPC.id
+    vpc_id = aws_vpc.defaultVPC.id
     tags = {
         Name = var.DefaultRT.name
     }
@@ -57,7 +58,7 @@ resource "aws_route_table_association" "RT_associate" {
 
 #Default Network ACL
 resource "aws_network_acl" "DefaultACL" {
-    vpc_id = aws_default_vpc.defaultVPC.id
+    vpc_id = aws_vpc.defaultVPC.id
 
     tags = {
         Name = var.DefaultACL.name
@@ -99,28 +100,15 @@ resource "aws_security_group" "DefaultSecurityGroups" {
 }
 
 #Default Security group rules
-#Ingress Rules
-resource "aws_security_group_rule" "DefaultIngress" {
-  type              = "ingress"
-  from_port         = var.DefaultIngress.from_port
-  to_port           = var.DefaultIngress.to_port
-  protocol          = var.DefaultIngress.protocol
-  cidr_blocks       = [var.DefaultIngress.cidr_blocks]
+resource "aws_security_group_rule" "DefaultSG_rules" {
+  count = length(var.DefaultSG_rules_type)
   security_group_id = aws_security_group.DefaultSecurityGroups.id
+  type              = var.DefaultSG_rules_type[count.index]
+  from_port         = var.DefaultSG_rules_from_port[count.index]
+  to_port           = var.DefaultSG_rules_to_port[count.index]
+  protocol          = var.DefaultSG_rules_protocol[count.index]
+  cidr_blocks       = [var.DefaultSG_rules_cidr_blocks[count.index]]
   depends_on = [
-    aws_security_group.SecurityGroups
+    aws_security_group.DefaultSecurityGroups
   ]
-}
-
-#Egress Rules
-resource "aws_security_group_rule" "DefaultEgress" {
-  type              = "egress"
-  from_port         = var.DefaultIngress.from_port
-  to_port           = var.DefaultIngress.to_port
-  protocol          = var.DefaultIngress.protocol
-  cidr_blocks       = [var.DefaultIngress.cidr_blocks]
-  security_group_id = aws_security_group.DefaultSecurityGroups.id
-  depends_on = [
-    aws_security_group.SecurityGroups
-  ]  
 }
