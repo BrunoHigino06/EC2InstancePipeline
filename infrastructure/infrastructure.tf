@@ -32,3 +32,4 @@ resource "aws_lb" "DefaulALB" {
 }
 
 #Launch template
+1
