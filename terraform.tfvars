@@ -1,3 +1,4 @@
+#Network module inputs
 #VPC inputs
 defaultVPC = {
     name = "DefaultVPC"
@@ -45,3 +46,16 @@ DefaultSG_rules_to_port = ["65535", "65535"]
 DefaultSG_rules_protocol = ["-1", "-1"]
 DefaultSG_rules_cidr_blocks = ["0.0.0.0/0", "0.0.0.0/0"]
 
+#Infrastructure module inputs
+#Target groups inputs
+MainTG_name = ["blue", "green"]
+MainTG_port = ["80", "80"]
+MainTG_protocol = ["HTTP", "HTTP"]
+MainTG_target_type = ["ip", "ip"]
+
+#Application load balance inputs
+DefaulALB = {
+    name = "FronEndALB"
+    internal = false
+    load_balancer_type = "application"
+}

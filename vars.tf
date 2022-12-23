@@ -133,3 +133,39 @@ variable "DefaultSG_rules_cidr_blocks" {
     type = list(string)
     description = "CIDR block used in the rule"
 }
+
+#Infrastructure module
+#Target group vars
+variable "MainTG_name" {
+  type = list(string)
+  description = "Name of the subnets"
+}
+
+variable "MainTG_port" {
+  type = list(string)
+  description = "Name of the subnets"
+}
+
+variable "MainTG_protocol" {
+  type = list(string)
+  description = "Name of the subnets"
+}
+
+variable "MainTG_target_type" {
+  type = list(string)
+  description = "Name of the subnets"
+}
+
+#Application load balance vars
+variable "DefaulALB" {
+  type = map(any)
+
+  default = {
+    name = ""
+    internal = ""
+    load_balancer_type = ""
+    security_groups = ""
+  }
+
+  description = "Default Application load balance variables"
+}

@@ -52,3 +52,32 @@ module "network" {
   DefaultSG_rules_cidr_blocks = var.DefaultSG_rules_cidr_blocks
 
 }
+
+module "infrastructure" {
+  source = ".\\infrastructure\\"
+  providers = {
+    aws = aws.us
+   }
+  
+  #Target group inputs
+  MainTG_name = var.MainTG_name
+  MainTG_port = var.MainTG_port
+  MainTG_protocol = var.MainTG_protocol
+  MainTG_target_type = var.MainTG_target_type
+  MainTG_vpc_id = module.network.vpc_id
+
+  #Application load balance inputs
+  DefaulALB = {
+    name = var.DefaulALB.name
+    internal = var.DefaulALB.internal
+    load_balancer_type = var.DefaulALB.load_balancer_type
+  }
+
+  DefaulALB_security_groups = [module.network.SG_id]
+  DefaulALB_subnets = [module.network.subnet_id[0], module.network.subnet_id[1]]
+
+  depends_on = [
+    module.network
+  ]
+
+}
