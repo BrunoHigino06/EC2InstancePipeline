@@ -59,3 +59,12 @@ DefaulALB = {
     internal = false
     load_balancer_type = "application"
 }
+
+#Load balancer listner inputs
+MainListner = {
+    port = "80"
+    protocol = "HTTP"
+    type = "forward"
+    weightBlue = "100"
+    weightGreen = "0"
+}

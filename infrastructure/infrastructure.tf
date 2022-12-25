@@ -30,6 +30,24 @@ resource "aws_lb" "DefaulALB" {
       aws_lb_target_group.MainTG
     ]
 }
+#Load balancer listner
+resource "aws_lb_listener" "MainListner" {
+  load_balancer_arn = aws_lb.DefaulALB.arn
+  port              = var.MainListner.port
+  protocol          = var.MainListner.protocol
 
-#Launch template
-1
+  default_action {
+    type             = var.MainListner.type
+    forward {
+      target_group {
+        arn    = aws_lb_target_group.MainTG[0].arn
+        weight = var.MainListner.weightBlue
+      }
+
+      target_group {
+        arn    = aws_lb_target_group.MainTG[1].arn
+        weight = var.MainListner.weightGreen
+      }
+    }
+  }
+}

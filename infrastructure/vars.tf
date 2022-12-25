@@ -44,3 +44,18 @@ variable "DefaulALB_subnets" {
 variable "DefaulALB_security_groups" {
   description = "VPC ID that is associate to the target group"
 }
+
+#Load balancer listner vars
+variable "MainListner" {
+  type = map(any)
+
+  default = {
+    port = ""
+    protocol = ""
+    type = ""
+    weightBlue = ""
+    weightGreen = ""
+  }
+
+  description = "Default Application load balance listner variables"
+}

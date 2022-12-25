@@ -80,4 +80,12 @@ module "infrastructure" {
     module.network
   ]
 
+  #Load balancer listner inputs
+  MainListner = {
+    port = var.MainListner.port
+    protocol = var.MainListner.protocol
+    type = var.MainListner.type
+    weightBlue = var.MainListner.weightBlue
+    weightGreen = var.MainListner.weightGreen
+  }
 }

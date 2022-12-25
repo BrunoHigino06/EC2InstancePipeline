@@ -169,3 +169,18 @@ variable "DefaulALB" {
 
   description = "Default Application load balance variables"
 }
+
+#Load balancer listner vars
+variable "MainListner" {
+  type = map(any)
+
+  default = {
+    port = ""
+    protocol = ""
+    type = ""
+    weightBlue = ""
+    weightGreen = ""
+  }
+
+  description = "Default Application load balance listner variables"
+}
