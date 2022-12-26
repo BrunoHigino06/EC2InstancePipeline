@@ -86,6 +86,7 @@ variable "vpc_zone_identifier" {
   type = map(any)
 
   default = {
+    name = ""
     desired_capacity = ""
     max_size = ""
     min_size = ""
@@ -100,6 +101,7 @@ variable "vpc_zone_identifier" {
   type = map(any)
 
   default = {
+    name = ""
     desired_capacity = ""
     max_size = ""
     min_size = ""

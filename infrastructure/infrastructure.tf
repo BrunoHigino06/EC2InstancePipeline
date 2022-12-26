@@ -76,6 +76,7 @@ resource "aws_launch_template" "MainTemplate" {
 #Autoscaling group
 #Blue autoscaling group
 resource "aws_autoscaling_group" "Blue_AutoScalingGroup" {
+  name = var.Blue_AutoScalingGroup.name
   vpc_zone_identifier = var.vpc_zone_identifier
   desired_capacity   = var.Blue_AutoScalingGroup.desired_capacity
   max_size           = var.Blue_AutoScalingGroup.max_size
@@ -89,6 +90,7 @@ resource "aws_autoscaling_group" "Blue_AutoScalingGroup" {
 
 #Green autoscaling group
 resource "aws_autoscaling_group" "Green_AutoScalingGroup" {
+  name = var.Green_AutoScalingGroup.name
   vpc_zone_identifier = var.vpc_zone_identifier
   desired_capacity   = var.Green_AutoScalingGroup.desired_capacity
   max_size           = var.Green_AutoScalingGroup.max_size

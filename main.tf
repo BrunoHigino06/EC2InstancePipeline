@@ -101,6 +101,7 @@ module "infrastructure" {
 
   #Blue autoscaling group inputs
   Blue_AutoScalingGroup = {
+    name = var.Blue_AutoScalingGroup.name
     desired_capacity = var.Blue_AutoScalingGroup.desired_capacity
     max_size = var.Blue_AutoScalingGroup.max_size
     min_size = var.Blue_AutoScalingGroup.min_size
@@ -109,6 +110,7 @@ module "infrastructure" {
 
   #Green autoscaling group
   Green_AutoScalingGroup = {
+    name = var.Green_AutoScalingGroup.name
     desired_capacity = var.Green_AutoScalingGroup.desired_capacity
     max_size = var.Green_AutoScalingGroup.max_size
     min_size = var.Green_AutoScalingGroup.min_size

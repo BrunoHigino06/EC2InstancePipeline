@@ -72,7 +72,7 @@ MainListner = {
 #Launch template inputs
   MainTemplate = {
     name = "test"
-    image_id = "ami-0b5eea76982371e91"
+    image_id = "ami-0f815ada7076e2aa2"
     instance_type = "t2.medium"
     resource_type = "instance"
 
@@ -81,6 +81,7 @@ MainListner = {
 #Autoscaling group inputs
 #Blue autoscaling group inputs
 Blue_AutoScalingGroup = {
+    name = "Blue"
     desired_capacity = "2"
     max_size = "4"
     min_size = "1"
@@ -89,6 +90,8 @@ Blue_AutoScalingGroup = {
 
 #Green autoscaling group
 Green_AutoScalingGroup = {
+
+    name = "Green"
     desired_capacity = "0"
     max_size = "0"
     min_size = "0"

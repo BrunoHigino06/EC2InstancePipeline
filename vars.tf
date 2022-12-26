@@ -206,6 +206,7 @@ variable "MainTemplate" {
   type = map(any)
 
   default = {
+    name = ""
     desired_capacity = ""
     max_size = ""
     min_size = ""
@@ -220,6 +221,7 @@ variable "MainTemplate" {
   type = map(any)
 
   default = {
+    name = ""
     desired_capacity = ""
     max_size = ""
     min_size = ""
