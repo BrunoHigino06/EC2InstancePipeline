@@ -81,8 +81,6 @@ module "infrastructure" {
     port = var.MainListner.port
     protocol = var.MainListner.protocol
     type = var.MainListner.type
-    weightBlue = var.MainListner.weightBlue
-    weightGreen = var.MainListner.weightGreen
   }
 
   #Launch template inputs
@@ -106,6 +104,7 @@ module "infrastructure" {
     max_size = var.Blue_AutoScalingGroup.max_size
     min_size = var.Blue_AutoScalingGroup.min_size
     version = var.Blue_AutoScalingGroup.version
+    weightBlue = var.Blue_AutoScalingGroup.weightBlue
   }
 
   #Green autoscaling group
@@ -115,6 +114,7 @@ module "infrastructure" {
     max_size = var.Green_AutoScalingGroup.max_size
     min_size = var.Green_AutoScalingGroup.min_size
     version = var.Green_AutoScalingGroup.version
+    weightGreen = var.Green_AutoScalingGroup.weightGreen
   }
 
   depends_on = [

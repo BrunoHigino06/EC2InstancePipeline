@@ -178,8 +178,6 @@ variable "MainListner" {
     port = ""
     protocol = ""
     type = ""
-    weightBlue = ""
-    weightGreen = ""
   }
 
   description = "Default Application load balance listner variables"
@@ -211,6 +209,7 @@ variable "MainTemplate" {
     max_size = ""
     min_size = ""
     version = ""
+    weightBlue = ""
   }
 
   description = "Blue autoscaling group variables"
@@ -226,6 +225,7 @@ variable "MainTemplate" {
     max_size = ""
     min_size = ""
     version = ""
+    weightGreen = ""
   }
 
   description = "Green autoscaling group variables"

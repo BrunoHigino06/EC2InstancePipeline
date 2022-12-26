@@ -53,8 +53,6 @@ variable "MainListner" {
     port = ""
     protocol = ""
     type = ""
-    weightBlue = ""
-    weightGreen = ""
   }
 
   description = "Default Application load balance listner variables"
@@ -91,6 +89,7 @@ variable "vpc_zone_identifier" {
     max_size = ""
     min_size = ""
     version = ""
+    weightBlue = ""
   }
 
   description = "Blue autoscaling group variables"
@@ -106,6 +105,7 @@ variable "vpc_zone_identifier" {
     max_size = ""
     min_size = ""
     version = ""
+    weightGreen = ""
   }
 
   description = "Green autoscaling group variables"

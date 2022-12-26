@@ -36,17 +36,22 @@ resource "aws_lb_listener" "MainListner" {
   port              = var.MainListner.port
   protocol          = var.MainListner.protocol
 
+
   default_action {
     type             = var.MainListner.type
     forward {
+      stickiness {
+        duration = "1"
+        enabled = false
+      }
       target_group {
         arn    = aws_lb_target_group.MainTG[0].arn
-        weight = var.MainListner.weightBlue
+        weight = var.Blue_AutoScalingGroup.weightBlue
       }
 
       target_group {
         arn    = aws_lb_target_group.MainTG[1].arn
-        weight = var.MainListner.weightGreen
+        weight = var.Green_AutoScalingGroup.weightGreen
       }
     }
   }

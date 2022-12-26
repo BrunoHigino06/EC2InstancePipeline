@@ -65,13 +65,11 @@ MainListner = {
     port = "80"
     protocol = "HTTP"
     type = "forward"
-    weightBlue = "100"
-    weightGreen = "0"
 }
 
 #Launch template inputs
   MainTemplate = {
-    name = "test"
+    name = "FrontEnd"
     image_id = "ami-0f815ada7076e2aa2"
     instance_type = "t2.medium"
     resource_type = "instance"
@@ -84,16 +82,17 @@ Blue_AutoScalingGroup = {
     name = "Blue"
     desired_capacity = "2"
     max_size = "4"
-    min_size = "1"
+    min_size = "2"
     version = "1"
+    weightBlue = "50"
 }
 
 #Green autoscaling group
 Green_AutoScalingGroup = {
-
     name = "Green"
-    desired_capacity = "0"
-    max_size = "0"
-    min_size = "0"
+    desired_capacity = "4"
+    max_size = "4"
+    min_size = "4"
     version = "1"
+    weightGreen = "50"
 }
