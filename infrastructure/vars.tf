@@ -38,11 +38,11 @@ variable "DefaulALB" {
 }
 
 variable "DefaulALB_subnets" {
-  description = "VPC ID that is associate to the target group"
+  description = "Subnet to be associated with the ALB"
 }
 
 variable "DefaulALB_security_groups" {
-  description = "VPC ID that is associate to the target group"
+  description = "Security groups to be associated with the ALB"
 }
 
 #Load balancer listner vars
@@ -58,4 +58,53 @@ variable "MainListner" {
   }
 
   description = "Default Application load balance listner variables"
+}
+
+#Launch template vars
+variable "MainTemplate" {
+  type = map(any)
+
+  default = {
+    name = ""
+    image_id = ""
+    instance_type = ""
+    vpc_security_group_ids = ""
+    resource_type = ""
+  }
+
+  description = "Default Application load balance listner variables"
+}
+
+#Autoscaling groups vars
+
+variable "vpc_zone_identifier" {
+  description = "Identification of the subnet used in the autoscaling groups"
+}
+
+#Blue autoscaling group vars
+ variable "Blue_AutoScalingGroup" {
+  type = map(any)
+
+  default = {
+    desired_capacity = ""
+    max_size = ""
+    min_size = ""
+    version = ""
+  }
+
+  description = "Blue autoscaling group variables"
+}
+
+#Green autoscaling group vars
+ variable "Green_AutoScalingGroup" {
+  type = map(any)
+
+  default = {
+    desired_capacity = ""
+    max_size = ""
+    min_size = ""
+    version = ""
+  }
+
+  description = "Green autoscaling group variables"
 }

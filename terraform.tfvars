@@ -51,7 +51,7 @@ DefaultSG_rules_cidr_blocks = ["0.0.0.0/0", "0.0.0.0/0"]
 MainTG_name = ["blue", "green"]
 MainTG_port = ["80", "80"]
 MainTG_protocol = ["HTTP", "HTTP"]
-MainTG_target_type = ["ip", "ip"]
+MainTG_target_type = ["instance", "instance"]
 
 #Application load balance inputs
 DefaulALB = {
@@ -67,4 +67,30 @@ MainListner = {
     type = "forward"
     weightBlue = "100"
     weightGreen = "0"
+}
+
+#Launch template inputs
+  MainTemplate = {
+    name = "test"
+    image_id = "ami-0b5eea76982371e91"
+    instance_type = "t2.medium"
+    resource_type = "instance"
+
+}
+
+#Autoscaling group inputs
+#Blue autoscaling group inputs
+Blue_AutoScalingGroup = {
+    desired_capacity = "2"
+    max_size = "4"
+    min_size = "1"
+    version = "1"
+}
+
+#Green autoscaling group
+Green_AutoScalingGroup = {
+    desired_capacity = "0"
+    max_size = "0"
+    min_size = "0"
+    version = "1"
 }

@@ -184,3 +184,47 @@ variable "MainListner" {
 
   description = "Default Application load balance listner variables"
 }
+
+#Launch template vars
+variable "MainTemplate" {
+  type = map(any)
+
+  default = {
+    name = ""
+    image_id = ""
+    instance_type = ""
+    resource_type = ""
+  }
+
+  description = "Default Application load balance listner variables"
+}
+
+#Autoscaling groups vars
+
+#Blue autoscaling group vars
+ variable "Blue_AutoScalingGroup" {
+  type = map(any)
+
+  default = {
+    desired_capacity = ""
+    max_size = ""
+    min_size = ""
+    version = ""
+  }
+
+  description = "Blue autoscaling group variables"
+}
+
+#Green autoscaling group vars
+ variable "Green_AutoScalingGroup" {
+  type = map(any)
+
+  default = {
+    desired_capacity = ""
+    max_size = ""
+    min_size = ""
+    version = ""
+  }
+
+  description = "Green autoscaling group variables"
+}

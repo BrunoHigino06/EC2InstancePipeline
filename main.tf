@@ -76,10 +76,6 @@ module "infrastructure" {
   DefaulALB_security_groups = [module.network.SG_id]
   DefaulALB_subnets = [module.network.subnet_id[0], module.network.subnet_id[1]]
 
-  depends_on = [
-    module.network
-  ]
-
   #Load balancer listner inputs
   MainListner = {
     port = var.MainListner.port
@@ -88,4 +84,38 @@ module "infrastructure" {
     weightBlue = var.MainListner.weightBlue
     weightGreen = var.MainListner.weightGreen
   }
+
+  #Launch template inputs
+  MainTemplate = {
+    name = var.MainTemplate.name
+    image_id = var.MainTemplate.image_id
+    instance_type = var.MainTemplate.instance_type
+    vpc_security_group_ids = module.network.SG_id
+    resource_type = var.MainTemplate.resource_type
+
+  }
+
+  #Autoscaling group inputs
+
+  vpc_zone_identifier = [module.network.subnet_id[0], module.network.subnet_id[1]]
+
+  #Blue autoscaling group inputs
+  Blue_AutoScalingGroup = {
+    desired_capacity = var.Blue_AutoScalingGroup.desired_capacity
+    max_size = var.Blue_AutoScalingGroup.max_size
+    min_size = var.Blue_AutoScalingGroup.min_size
+    version = var.Blue_AutoScalingGroup.version
+  }
+
+  #Green autoscaling group
+  Green_AutoScalingGroup = {
+    desired_capacity = var.Green_AutoScalingGroup.desired_capacity
+    max_size = var.Green_AutoScalingGroup.max_size
+    min_size = var.Green_AutoScalingGroup.min_size
+    version = var.Green_AutoScalingGroup.version
+  }
+
+  depends_on = [
+    module.network
+  ]
 }

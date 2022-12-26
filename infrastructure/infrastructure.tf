@@ -51,3 +51,51 @@ resource "aws_lb_listener" "MainListner" {
     }
   }
 }
+
+#Launch template
+resource "aws_launch_template" "MainTemplate" {
+  name = var.MainTemplate.name
+  image_id = var.MainTemplate.image_id
+  instance_type = var.MainTemplate.instance_type
+  vpc_security_group_ids = [var.MainTemplate.vpc_security_group_ids]
+
+  tag_specifications {
+    resource_type = var.MainTemplate.resource_type
+
+    tags = {
+      Name = var.MainTemplate.name
+    }
+  }
+
+  tags = {
+    "name" = var.MainTemplate.name
+  }
+
+}
+
+#Autoscaling group
+#Blue autoscaling group
+resource "aws_autoscaling_group" "Blue_AutoScalingGroup" {
+  vpc_zone_identifier = var.vpc_zone_identifier
+  desired_capacity   = var.Blue_AutoScalingGroup.desired_capacity
+  max_size           = var.Blue_AutoScalingGroup.max_size
+  min_size           = var.Blue_AutoScalingGroup.min_size
+  target_group_arns = [aws_lb_target_group.MainTG[0].arn]
+  launch_template {
+    id      = aws_launch_template.MainTemplate.id
+    version = var.Blue_AutoScalingGroup.version
+  }
+}
+
+#Green autoscaling group
+resource "aws_autoscaling_group" "Green_AutoScalingGroup" {
+  vpc_zone_identifier = var.vpc_zone_identifier
+  desired_capacity   = var.Green_AutoScalingGroup.desired_capacity
+  max_size           = var.Green_AutoScalingGroup.max_size
+  min_size           = var.Green_AutoScalingGroup.min_size
+  target_group_arns = [aws_lb_target_group.MainTG[1].arn]
+  launch_template {
+    id      = aws_launch_template.MainTemplate.id
+    version = var.Green_AutoScalingGroup.version
+  }
+}
