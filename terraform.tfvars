@@ -83,8 +83,8 @@ Blue_AutoScalingGroup = {
     desired_capacity = "2"
     max_size = "4"
     min_size = "2"
-    version = "1"
-    weightBlue = "50"
+    version = "2"
+    weightBlue = "10"
 }
 
 #Green autoscaling group
@@ -94,5 +94,5 @@ Green_AutoScalingGroup = {
     max_size = "4"
     min_size = "4"
     version = "1"
-    weightGreen = "50"
+    weightGreen = "90"
 }
